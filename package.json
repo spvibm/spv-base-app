@@ -1,0 +1,18 @@
+{
+  "name": "base-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-http-context": "^1.2.4",
+    "xdome-extension-rest": "git+https://github.com/x-dome/xdome-extension-rest.git#releases/0.x/v0.1.1"
+  }
+}
