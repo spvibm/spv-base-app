@@ -33,8 +33,9 @@ module.exports = class BaseApp {
 
     getRoutes() {
         // let accessPoints = new (require(path.join(process.cwd(), '/src/plugins/accessPoints')))(this.options.express, spvInfo.accessPoints);
-        let accessPoints    = new (require("./plugins/accessPoints"))(this.options.express, spvInfo.accessPoints);
+        // let accessPoints    = new (require("./plugins/accessPoints"))(this.options.express, spvInfo.accessPoints);
         // let accessPoints = new (require(path.join(process.cwd(), '/src/plugins/accessPoints')))(this.options.express, spvInfo.accessPoints);
+        let accessPoints = new (require(path.join(process.cwd(), '/src/plugins/accessPoints')))(this.options.express, spvInfo.accessPoints);
         accessPoints.setRoutes();
         return accessPoints;
     }
