@@ -13,6 +13,6 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-http-context": "^1.2.4",
-    "xdome-extension-rest": "git+https://github.com/x-dome/xdome-extension-rest.git#releases/0.x/v0.1.1"
+    "spv-rest-extension": "git+https://github.com/spvibm/spv-extension-rest"
   }
 }
