@@ -8,7 +8,7 @@ module.exports = class BaseApp {
         const defaults = {
             useHttpContext: true,
             config: require('config'),
-            logger: '', // require('@common/node-logger/src/logger'),
+            logger: "",
             express: require('express'),
             useSecurity: true,
             useCors: false,
@@ -18,6 +18,7 @@ module.exports = class BaseApp {
             useVersion: true,
             healthCheckConfig: null,
             useCache: false,
+            basePath: spvInfo.basePath || ""
         };
 
         this.options = Object.assign({}, defaults, options);
@@ -25,23 +26,20 @@ module.exports = class BaseApp {
         if (this.options.config.has('cors.enabled')) {
             this.options.useCors = this.options.config.get('cors.enabled');
         }
+
         this.app = this.options.express();
         this.beforeMountRoutes();
-        this.app.use(this.getRoutes().router);
+        this.app.use(this.options.basePath, this.getRoutes().router);
         this.afterMountRoutes();
     }
 
     getRoutes() {
-        // let accessPoints = new (require(path.join(process.cwd(), '/src/plugins/accessPoints')))(this.options.express, spvInfo.accessPoints);
-        // let accessPoints    = new (require("./plugins/accessPoints"))(this.options.express, spvInfo.accessPoints);
-        // let accessPoints = new (require(path.join(process.cwd(), '/src/plugins/accessPoints')))(this.options.express, spvInfo.accessPoints);
         let accessPoints = new (require(path.join(process.cwd(), '/src/plugins/accessPoints')))(this.options.express, spvInfo.accessPoints);
         accessPoints.setRoutes();
         return accessPoints;
     }
 
     async start() {
-        // this.startTunnels();
         this.server = await this.startServer();        
     }
 
