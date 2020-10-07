@@ -44,8 +44,6 @@ module.exports = class BaseApp {
     }
 
     mountBodyParser() {
-        // this.app.use(bodyParser.json());
-        // this.app.use(bodyParser.urlencoded({extended: true}));
         if (this.options.useBodyParser) {
             const bodyParser = require('body-parser');
             this.app.use(bodyParser.json({type: 'application/json'}));
@@ -59,56 +57,20 @@ module.exports = class BaseApp {
             }));
         }
     }
-    mount404ErrorNotFound() {
-        // catch 404 and forward to error handler
-        this.app.use(function(req, res, next) {
-            const e = new Error();
-            e.code = 'not_found';
-            e.message = 'No representation found for the target resource';
-            e.severity = 'HIGH';
-            e.status = 404;
-
-            throw e;
-        });
-    }
 
     beforeMountRoutes() {
-        // this.app.disable("x-powered-by");
-        // this.app.use(cors())
-        // this.app.use(compression());
-
-        // this.mountVersion();
-        // this.mountCoverage();
         this.mountBodyParser();
-        // this.mountHttpContext();
-        // this.mountMessageTracking();
-        // this.mountLogger();
-        // this.mountSwaggerStatsLogger();
-        // this.mountHealthCheck();
-        // this.mountSecurity();
         this.mountCors();
-        // this.mountTokenDecoder();
-        // this.mount400InvalidJSONParameters();
-        // this.mountCache();
     }
     afterMountRoutes() {
-        // this.mount404ErrorNotFound();
-        // this.mountErrorMiddleware();
     }
 
     startServer() {
         const port = this.options.config.get('port') || 3000;
         const app = this.app;
-        // const logger = this.options.logger;
         return new Promise(function(resolve, reject) {
             const server = app.listen(port, function() {
                 console.log(`Application ${packageInfo.name} started at port ${port}`)
-                // logger.info(
-                //     `Application ${packageInfo.name} started at port ${port}`, {
-                //         type: 'application_start',
-                //         applicationName: packageInfo.name,
-                //         port,
-                //     });
                 resolve(server);
             });
         });
